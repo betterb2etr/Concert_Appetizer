@@ -1,4 +1,4 @@
-package com.groove.concert_appetizer.playlist.entity;
+package com.groove.concert_appetizer.domain.playlist.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,29 +13,34 @@ import lombok.NoArgsConstructor;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
-@Table(name = "actual_setlist")
+@Table(name = "playlist_song")
 @Getter
 @NoArgsConstructor(access = PROTECTED)
-public class ActualSetlist {
+public class PlaylistSong {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ConcertPost FK - 일단 Long 값만 보관 (다른 BC와 연관관계 최소화)
+    // ExpectedPlaylist FK
     @Column(nullable = false)
-    private Long postId;
+    private Long playlistId;
 
     @Column(nullable = false)
-    private String songTitle;   // romaji 기준으로 저장
+    private String songTitle;
 
     @Column(nullable = false)
     private Integer orderIndex;
 
+    @Column(nullable = false)
+    private Boolean isMatch;
+
     @Builder
-    private ActualSetlist(Long postId, String songTitle, Integer orderIndex) {
-        this.postId = postId;
+    private PlaylistSong(Long playlistId, String songTitle,
+                         Integer orderIndex, Boolean isMatch) {
+        this.playlistId = playlistId;
         this.songTitle = songTitle;
         this.orderIndex = orderIndex;
+        this.isMatch = isMatch;
     }
 }

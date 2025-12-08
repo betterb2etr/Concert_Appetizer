@@ -1,4 +1,4 @@
-package com.groove.concert_appetizer.playlist.entity;
+package com.groove.concert_appetizer.domain.playlist.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
