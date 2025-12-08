@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.5' // 안정적인 3.x 버전 권장
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.ohgiraffers'
+version = '0.0.1-SNAPSHOT'
+description = 'concert_appetizer'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 1. Web (MVC + Tomcat 내장)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // 2. Data (JPA)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // 3. Database (H2 - 개발용 필수)
+    runtimeOnly 'com.h2database:h2'
+
+    // 4. View (Thymeleaf - 필요 없다면 제거 가능)
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // 5. Utils
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools' // 서버 자동 재시작용
+
+    // 6. Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
