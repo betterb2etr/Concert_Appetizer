@@ -1,4 +1,4 @@
-package com.ohgiraffers.concert_appetizer;
+package com.group.concert_appetizer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
