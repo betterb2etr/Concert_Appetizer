@@ -1,4 +1,4 @@
-package com.ohgiraffers.concert_appetizer;
+package com.groove.concert_appetizer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
