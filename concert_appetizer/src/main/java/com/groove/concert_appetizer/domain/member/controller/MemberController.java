@@ -3,6 +3,7 @@ package com.groove.concert_appetizer.domain.member.controller;
 import com.groove.concert_appetizer.common.response.ApiResponse;
 import com.groove.concert_appetizer.domain.member.dto.MemberRequest;
 import com.groove.concert_appetizer.domain.member.dto.MemberResponse;
+import com.groove.concert_appetizer.domain.member.entity.MemberRole;
 import com.groove.concert_appetizer.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +24,18 @@ public class MemberController {
         return ApiResponse.success(memberId);
     }
 
+
     @PostMapping("/login")
     public ApiResponse<MemberResponse> login(@RequestBody MemberRequest.Login request) {
-        MemberResponse response = memberService.login(request);
-        // 프론트엔드는 이 response의 memberId를 LocalStorage에 저장해서 쓰면 됩니다.
-        return ApiResponse.success(response);
+        // DB 조회 로직 제거 -> 무조건 성공 처리
+        MemberResponse mockMember = MemberResponse.builder()
+                .memberId(1L)
+                .email(request.getEmail())
+                .nickname("해커톤러버") // 아무 닉네임이나 리턴
+                .role(MemberRole.GENERAL)
+                .build();
+
+        return ApiResponse.success(mockMember);
     }
+
 }
